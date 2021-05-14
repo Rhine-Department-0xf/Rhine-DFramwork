@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HTTP Decrypt</title>
+    <link rel="icon" href="/static/images/icon.png" type="image/x-icon"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script src="{{url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/socket.io.js') }}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='js/app.js') }}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='edit-js/ace.js') }}"></script>
+	<script type="text/javascript" src="{{url_for('static', filename='edit-js/ext-language_tools.js') }}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.min.js') }}"></script>
+{#    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">#}
+{#	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>#}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/easyui.css') }}">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="{{url_for('static', filename='js/jquery.ztree.core.min.js') }}"></script>
+    <script src="{{url_for('static', filename='js/jquery.ztree.exhide.min.js') }}"></script>
+    <script src="{{url_for('static', filename='js/fuzzysearch.js') }}"></script>
+	<script src="{{url_for('static', filename='js/jquery.easyui.min.js') }}"></script>
+    <script src="{{url_for('static', filename='js/bootstrap-switch.min.js') }}"></script>
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/zTreeStyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap-switch.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/icon.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+</head>
+<body>
+    {{ header |safe}}
+    <div class="container-fluid">
+        <hr>
+        <div class="root">
+            <ul class="nav nav-tabs ">
+
+                <li class="active"><a data-toggle="tab" href="#home" ><i class="glyphicon glyphicon-home" style="color: #337ab7"></i>  Home</a></li>
+                <li><a data-toggle="tab" href="#hook" ><i class="glyphicon glyphicon-th-large" style="color: #337ab7"></i> Hooks</a></li>
+                <li><a data-toggle="tab" href="#stack"><i class="glyphicon glyphicon-oil" style="color: #337ab7"></i> Stack</a></li>
+                <li><a data-toggle="tab" href="#find"><i class="glyphicon glyphicon-search" style="color: #337ab7"></i> Finds</a></li>
+                <li><a data-toggle="tab" href="#uidump"><i class="glyphicon glyphicon-eye-open" style="color: #337ab7"></i> UIDump</a></li>
+                <li><a data-toggle="tab" href="#toBurp"><i class="glyphicon glyphicon-th" style="color: #337ab7"></i> toBurp</a></li>
+                <li><a data-toggle="tab" href="#Custom"><i class="glyphicon glyphicon-user" style="color: #337ab7"></i> Custom</a></li>
+                <li><a data-toggle="tab" href="#Decoder"><i class="glyphicon glyphicon-transfer" style="color: #337ab7"></i> Decoder</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane fade in active" id="home">
+                        {{ home |safe}}
+                </div>
+
+                <div class="tab-pane fade form-group" id="hook">
+                        {{ hook |safe}}
+                </div>
+
+                <div class="tab-pane fade form-group" id="stack">
+                    {{ stack |safe}}
+                </div>
+
+                <div class="tab-pane fade form-group" id="find">
+                    {{ find |safe}}
+                </div>
+
+
+                <div class="tab-pane fade form-group" id="uidump">
+                    {{ uidump |safe}}
+                </div>
+
+                <div class="tab-pane fade form-group" id="toBurp">
+                    {{ toBurp |safe}}
+                </div>
+
+                <div class="tab-pane fade form-group" id="Custom">
+                    {{ custom |safe}}
+                </div>
+
+                <div class="tab-pane fade form-group" id="Decoder">
+                    {{ decoder |safe}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+	<script src="{{url_for('static', filename='js/editortree.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+{
+  "battleId": "d895d4d0-a8bf-11eb-b61c-63ae83ea91d8",
+  "interrupt": 0,
+  "giveUp": 0,
+  "percent": 100,
+  "completeState": 3,
+  "killCnt": 11,
+  "validKillCnt": 11,
+  "battleData": {
+    "stats": {
+      "killedEnemiesCnt": 11,
+      "unnatrualRecoveredCost": 0,
+      "charStats": [
+        {
+          "Key": {
+            "charId": "char_502_nblade",
+            "counterType": "SPAWN"
+          },
+          "Value": 1
+        },
+        {
+          "Key": {
+            "charId": "char_002_amiya",
+            "counterType": "SPAWN"
+          },
+          "Value": 1
+        }
+      ],
+      "enemyStats": [
+        {
+          "Key": {
+            "enemyId": "enemy_1007_slime",
+            "counterType": "ENCOUNTER",
+            "isInvalidKilled": 0
+          },
+          "Value": 10
+        },
+        {
+          "Key": {
+            "enemyId": "enemy_1007_slime",
+            "counterType": "HP_ZERO",
+            "isInvalidKilled": 0
+          },
+          "Value": 10
+        },
+        {
+          "Key": {
+            "enemyId": "enemy_1002_nsabr",
+            "counterType": "ENCOUNTER",
+            "isInvalidKilled": 0
+          },
+          "Value": 1
+        },
+        {
+          "Key": {
+            "enemyId": "enemy_1002_nsabr",
+            "counterType": "HP_ZERO",
+            "isInvalidKilled": 0
+          },
+          "Value": 1
+        }
+      ],
+      "skillTrigStats": [],
+      "charAdvancedStats": {},
+      "enemyAdvancedStats": {},
+      "runeAdvancedStats": [],
+      "rlBuffAdvancedStats": [],
+      "extraBattleInfoStats": {},
+      "charList": {
+        "1": [
+          -318,
+          0,
+          [
+            [
+              1619682770,
+              815,
+              318,
+              50,
+              10,
+              18,
+              1,
+              100,
+              1.6,
+              70,
+              [
+                {
+                  "values": []
+                }
+              ],
+              {
+                "values": [
+                  30,
+                  30
+                ]
+              },
+              null
+            ]
+          ],
+          [
+            0,
+            4,
+            0,
+            1,
+            0,
+            25
+          ]
+        ],
+        "2": [
+          -165,
+          0,
+          [
+            [
+              1619682779,
+              721,
+              165,
+              134,
+              0,
+              7,
+              2,
+              100,
+              1.05,
+              70,
+              [],
+              null,
+              null
+            ]
+          ],
+          [
+            0,
+            1,
+            -1,
+            0,
+            0,
+            25
+          ]
+        ]
+      },
+      "enemyList": {
+        "enemy_1007_slime": [
+          [
+            550,
+            130,
+            0,
+            0,
+            100,
+            1.7,
+            1
+          ]
+        ],
+        "enemy_1002_nsabr": [
+          [
+            1650,
+            200,
+            30,
+            0,
+            100,
+            2,
+            1.1
+          ]
+        ]
+      },
+      "runeList": [],
+      "rlBuffList": [],
+      "beginTs": 1619682748,
+      "endTs": 1619682796,
+      "access": "B558E602D90139A8DFA8A1786CDD6FDA",
+      "hash": "62AE221E4C5D4CAD4B851D7380F4ED2C",
+      "packageName": "com.hypergryph.arknights",
+      "checkKilledCnt": 1,
+      "leftHp": 20,
+      "extraInfo": {
+        "8": "id=8|name=Netease99",
+        "100": "id=1|seq=2210|pid=1366|time=1619682794"
+      },
+      "extraBattleInfo": {},
+      "clientAntiCheatLog": {},
+      "idList": [],
+      "autoReplayCancelled": 0
+    },
+    "isCheat": "az9APGs7azc0aD9pbTQ4OGxpNGk9OGo0PTpobD86bGhAOGs/",
+    "completeTime": 42
+  },
+  "platform": 1
+}

@@ -1,0 +1,7 @@
+__pycache__/
+/venv/
+/bin/
+/data/rawhttp/
+/frida_hooks/
+/notes/
+/playground/
