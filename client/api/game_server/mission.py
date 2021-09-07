@@ -108,3 +108,23 @@ def exchange_mission_reward_by_type(account: PlayerAccount, mission_type):
             return
     logger.info("[{}] try to exchange more mission".format(account.uid))
     exchange_mission_reward_by_type(account, mission_type)
+
+
+AUTO_CONFIRM_MISSIONS_URL = config.NetworkConfig.get_game_server_url("/mission/autoConfirmMissions")
+AUTO_CONFIRM_MISSIONS_DATA = {
+    "type": "DAILY"
+}
+
+
+@response_process_flow(logger,
+                       update_player_delta(),
+                       just_log("[{}] success"))
+def auto_confirm_missions_by_type(account: PlayerAccount, mission_type):
+    logger.info("[{}] auto confirm {} missions".format(account.uid,
+                                                       mission_type))
+    data = AUTO_CONFIRM_MISSIONS_DATA.copy()
+    data["type"] = mission_type
+    ret_data = http_client.post_with_seqnum(account,
+                                            AUTO_CONFIRM_MISSIONS_URL,
+                                            data=json.dumps(data))
+    return ret_data

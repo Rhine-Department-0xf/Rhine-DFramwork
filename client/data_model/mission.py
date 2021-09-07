@@ -13,7 +13,7 @@ class MissionState(ArkEnum):
     FINISH = 3
 
 
-class MissionType(Enum):
+class MissionType(ArkEnum):
     OPENSERVER = "OPENSERVER"
     DAILY = "DAILY"
     WEEKLY = "WEEKLY"

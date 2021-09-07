@@ -24,6 +24,8 @@ U8_GET_TOKEN_DATA = "appId={app_id}&channelId={channel_id}" \
                     "&deviceId={device_id}&deviceId2={device_id2}&deviceId3={device_id3}" \
                     "&extension={extension}" \
                     "&platform={platform}&subChannel={sub_channel}&worldId={world_id}"
+CHAT_MASK = "UITpAi82pHAWwnzq" \
+            "HRMCwPonJLIB3WCl"
 
 
 def get_random_string(n):
@@ -104,8 +106,10 @@ def encrypt_battle_data(data, login_time):
     key_array = bytearray.fromhex(get_md5(LOG_TOKEN_KEY.format(login_time=login_time)))
     return binascii.hexlify(rijndael_encrypt(data.encode(), key_array, iv) + iv).decode().upper()
 
-def get_battle_data_access(login_time,hash_key=DEFAULT_BATTLE_DATA_HASH_KEY):
-    return get_md5(hash_key+str(login_time)).upper()
+
+def get_battle_data_access(login_time, hash_key=DEFAULT_BATTLE_DATA_HASH_KEY):
+    return get_md5(hash_key + str(login_time)).upper()
+
 
 def encrypt_battle_id(battle_id):
     data = bytearray(battle_id.encode())
@@ -128,6 +132,7 @@ def decrypt_battle_replay(battle_replay):
         #     print(z_file.read(fileinfo).decode())
         return z_file.read("default_entry").decode()
 
+
 # todo not tested yet
 def encrypt_battle_replay(battle_replay):
     timestamp = json.loads(battle_replay)["timestamp"]
@@ -139,12 +144,25 @@ def encrypt_battle_replay(battle_replay):
                    compress_type=zipfile.ZIP_DEFLATED)
     return base64.b64encode(string_io.getvalue()).decode()
 
+
+# TextAsset 资源解密
+# Torappu_DB_CrypticConverter_A__DecodeInternal
+def decrypt_text_asset(binarydata):
+    # TextAsset资源使用aes-128-cbc加密算法, 加密key是CHAT_MASK前16字节
+    aes_key = bytearray(CHAT_MASK[:16].encode())
+    aes_iv  = bytearray(16)
+    buf = binarydata[:16]
+    mask = bytearray(CHAT_MASK[16:].encode())
+    for i in range(16):
+        aes_iv[i] = buf[i] ^ mask[i]
+    return rijndael_decrypt(binarydata[16:], aes_key, aes_iv)
+
 class mscorlib_Random():
     MBIG = 2147483647
     MSEED = 161803398
     MZ = 0
 
-    def __init__(self,seed):
+    def __init__(self, seed):
         self.seed = seed
         self.seed_array = [0 for i in range(56)]
 
@@ -152,22 +170,21 @@ class mscorlib_Random():
         self.inextp = 0
         self.__init_seed_array()
 
-
     def __init_seed_array(self):
         ii = 0
-        mj,mk = 0,0
+        mj, mk = 0, 0
         mj = self.MSEED - abs(self.seed)
         self.seed_array[55] = mj
         mk = 1
-        for i in range(1,55):
+        for i in range(1, 55):
             ii = (21 * i) % 55
             self.seed_array[ii] = mk
-            mk = mj-mk
+            mk = mj - mk
             if (mk < 0):
                 mk += self.MBIG
             mj = self.seed_array[ii]
-        for k in range(1,5):
-            for i in range(1,56):
+        for k in range(1, 5):
+            for i in range(1, 56):
                 self.seed_array[i] -= self.seed_array[1 + (i + 30) % 55]
                 if self.seed_array[i] < 0:
                     self.seed_array[i] += self.MBIG
@@ -179,16 +196,13 @@ class mscorlib_Random():
         return cls(int(time.time()))
 
     def sample(self):
-        self.inext = 1 if (self.inext+1)>=56 else self.inext + 1
-        self.inextp = 1 if (self.inextp+1)>=56 else self.inextp + 1
-        ret_val = self.seed_array[self.inext]-self.seed_array[self.inextp]
-        if ret_val <0:
+        self.inext = 1 if (self.inext + 1) >= 56 else self.inext + 1
+        self.inextp = 1 if (self.inextp + 1) >= 56 else self.inextp + 1
+        ret_val = self.seed_array[self.inext] - self.seed_array[self.inextp]
+        if ret_val < 0:
             ret_val += self.MBIG
         self.seed_array[self.inext] = ret_val
-        return ret_val * (1/self.MBIG)
+        return ret_val * (1 / self.MBIG)
 
     def next_double(self):
         return self.sample()
-
-
-

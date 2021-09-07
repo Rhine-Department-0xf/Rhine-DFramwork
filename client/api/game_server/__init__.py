@@ -122,3 +122,4 @@ from client.api.game_server import mail
 from client.api.game_server import mission
 from client.api.game_server import battle
 from client.api.game_server import building
+from client.api.game_server import social

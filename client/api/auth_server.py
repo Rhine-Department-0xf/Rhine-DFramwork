@@ -104,34 +104,35 @@ U8_GETTOKEN_DATA = {
 }
 
 
-def get_token(account: PlayerAccount):
+def get_token(account: PlayerAccount,login_para:LoginPara):
     logger.info("get token")
     data = U8_GETTOKEN_DATA.copy()
-    data["appId"] = LoginPara.APP_ID.value
-    data["channelId"] = LoginPara.CHANNEL_ID.value
+    data["appId"] = login_para.APP_ID
+    data["channelId"] = login_para.CHANNEL_ID
     data["deviceId"] = account.device_id
     data["deviceId2"] = account.device_id2
     data["extension"] = json.dumps({"uid": account.channel_uid,
                                     "access_token": account.access_token}).replace(" ", "")
     data["platform"] = PlatformKey.ANDROID.value
-    data["subChannel"] = LoginPara.SUB_CHANNEL.value
-    data["worldId"] = LoginPara.WORLD_ID.value
-    data["sign"] = encryption.get_u8_gettoken_sign(LoginPara.APP_ID.value,
-                                                   LoginPara.CHANNEL_ID.value,
+    data["subChannel"] = login_para.SUB_CHANNEL
+    data["worldId"] = login_para.WORLD_ID
+    data["sign"] = encryption.get_u8_gettoken_sign(login_para.APP_ID,
+                                                   login_para.CHANNEL_ID,
                                                    account.device_id,
                                                    account.device_id2,
                                                    account.device_id3,
                                                    {"uid": account.channel_uid,
                                                     "access_token": account.access_token},
                                                    PlatformKey.ANDROID.value,
-                                                   LoginPara.SUB_CHANNEL.value,
-                                                   LoginPara.WORLD_ID.value
+                                                   login_para.SUB_CHANNEL,
+                                                   login_para.WORLD_ID
                                                    )
+    print(data)
     ret_data = http_client.post(account, U8_GETTOKEN_URL, data=json.dumps(data))
     if ret_data is None:
         logger.error("http get/post fail")
         return
-    if ret_data["result"] != 0:
+    if ret_data.get("result") is None or ret_data["result"] != 0:
         logger.warning("fail,reason: {}".format(json.dumps(ret_data)))
         return
     account.uid = ret_data["uid"]

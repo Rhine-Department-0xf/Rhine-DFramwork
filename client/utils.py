@@ -25,9 +25,6 @@ def deep_update(origin:dict,modified:dict):
             origin[key] = modified[key]
     return origin
 
-
-
-
 def log_wrapper(func_overrider):
     old_factory = logging.getLogRecordFactory()
 
